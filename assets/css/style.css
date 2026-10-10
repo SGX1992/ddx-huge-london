@@ -1,0 +1,530 @@
+*{box-sizing:border-box;margin:0;padding:0}
+[hidden]{display:none!important}
+
+/* The DDX chrome — near-black, hairlines, one accent — with the accent handed
+   to Huge for the night: their pink, straight off the wordmark. Type follows
+   the invitation Huge sent: a tall condensed display face, a mono for the
+   facts, Inter for everything that has to be read. */
+:root{
+  --bg:#050505;
+  --card:#0B0B0B;
+  --input-bg:#090909;
+  --input-border:#242424;
+  --surface:#0E0E0E;
+  --surface-hi:#191919;
+  --accent:#FF31A1;
+  --accent-rgb:255,49,161;
+  --text:#ffffff;
+  --text-dim:#9A9A9A;
+  --text-faint:#5C5C5C;
+  --font:Inter,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  --display:Anton,Impact,"Arial Narrow",sans-serif;
+  --mono:"Space Mono","SF Mono",Menlo,monospace;
+  --measure:1180px;
+  --gutter:clamp(20px,5vw,72px);
+  color-scheme:dark;
+}
+
+html{scroll-behavior:smooth}
+html,body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:100%;max-width:100%;overflow-x:clip;-webkit-font-smoothing:antialiased}
+img,svg{max-width:100%;display:block}
+a{color:inherit}
+button,input,textarea,select{font:inherit;color:inherit}
+.wrap{max-width:var(--measure);margin:0 auto;padding:0 var(--gutter)}
+
+.preview-bar{
+  position:sticky;top:0;z-index:40;display:flex;justify-content:center;gap:10px;
+  padding:8px 16px;background:var(--accent);color:#0B0B0B;font-size:13px;font-weight:600;text-align:center;
+}
+
+/* ---------- lockup: Huge | DDX ---------- */
+.lockup{display:flex;align-items:center;gap:18px}
+.lockup__huge{display:block;color:var(--accent)}
+.lockup__huge svg{height:30px;width:auto;fill:currentColor}
+.lockup__sep{width:1px;height:30px;background:rgba(255,255,255,.35)}
+.lockup__ddx{height:22px;width:auto}
+.lockup--small .lockup__huge svg{height:22px}
+.lockup--small .lockup__ddx{height:16px}
+.lockup--small .lockup__sep{height:22px}
+
+/* ---------- hero ----------
+   Midtown at golden hour is the thesis: the event is in New York, the hour is
+   late afternoon, and the Empire State is four blocks from the venue. */
+.hero{position:relative;overflow:hidden;isolation:isolate;min-height:100svh;display:flex;flex-direction:column}
+.hero>.wrap{width:100%}
+.hero__img{
+  position:absolute;inset:0;z-index:-2;width:100%;height:100%;object-fit:cover;object-position:50% 40%;
+  transform:scale(1.04);transform-origin:50% 60%;
+}
+.hero::before{
+  content:"";position:absolute;inset:0;z-index:-1;
+  background:
+    linear-gradient(180deg,rgba(5,5,5,.78) 0%,rgba(5,5,5,.28) 30%,rgba(5,5,5,.42) 62%,var(--bg) 100%),
+    linear-gradient(90deg,rgba(5,5,5,.72) 0%,rgba(5,5,5,.1) 70%);
+}
+.hero__top{display:flex;align-items:center;justify-content:space-between;padding-top:28px}
+.hero__pill{
+  font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#fff;text-decoration:none;
+  padding:10px 18px;border-radius:999px;border:1px solid rgba(255,255,255,.34);
+  background:rgba(5,5,5,.38);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+}
+.hero__pill:hover{border-color:var(--accent);color:var(--accent)}
+
+.hero__body{padding-top:clamp(48px,7vw,96px);padding-bottom:clamp(44px,6vw,80px);max-width:calc(940px + 2 * var(--gutter));flex:1;display:flex;flex-direction:column;justify-content:flex-end}
+.eyebrow{
+  display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+  font-family:var(--mono);font-size:12.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);
+}
+.eyebrow i{display:inline-block;width:26px;height:2px;background:var(--accent)}
+.eyebrow span+span{color:rgba(255,255,255,.72)}
+.hero h1{
+  margin-top:18px;
+  font-family:var(--display);font-weight:400;
+  font-size:clamp(72px,12.5vw,164px);line-height:.86;letter-spacing:-.005em;text-transform:uppercase;
+  display:flex;flex-wrap:wrap;column-gap:.18em;
+}
+/* The invite's own treatment: pink bleeding into white along the word. */
+.hero h1 span{
+  background:linear-gradient(180deg,var(--accent) 0%,#FF8FCF 42%,#fff 78%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  padding-bottom:.05em;
+}
+.hero h1 .h1__b{background:linear-gradient(180deg,#fff 0%,#fff 60%,rgba(255,255,255,.7) 100%);-webkit-background-clip:text;background-clip:text}
+.hero__sub{margin-top:22px;max-width:44ch;font-size:clamp(17px,1.7vw,21px);line-height:1.45;color:rgba(255,255,255,.9)}
+
+.facts{margin-top:34px;display:grid;grid-template-columns:repeat(3,auto);gap:22px 40px;justify-content:start}
+.facts div{display:flex;flex-direction:column;gap:6px;padding-left:14px;border-left:1px solid rgba(255,255,255,.28)}
+.facts dt{font-family:var(--mono);font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent)}
+.facts dd{font-size:17px;font-weight:600;letter-spacing:-.01em;line-height:1.3}
+.facts dd small{display:block;font-weight:400;font-size:14px;color:rgba(255,255,255,.7);margin-top:2px}
+
+.hero__cta{margin-top:36px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.hero__cta .cta{width:auto;text-decoration:none}
+.ghost{
+  font-size:14.5px;font-weight:600;color:#fff;text-decoration:none;
+  padding:14px 22px;border-radius:999px;border:1px solid rgba(255,255,255,.34);
+  background:rgba(5,5,5,.3);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+}
+.ghost:hover{border-color:var(--accent);color:var(--accent)}
+
+.hero__mark{position:absolute;right:var(--gutter);bottom:clamp(40px,6vw,80px);z-index:1;width:clamp(150px,18vw,280px);height:auto;opacity:.95;pointer-events:none}
+
+/* ---------- shared: kickers, heads, ctas ---------- */
+.kicker{font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);margin-bottom:16px}
+h2{font-family:var(--display);font-weight:400;font-size:clamp(40px,6vw,84px);line-height:.92;letter-spacing:.005em;text-transform:uppercase;text-wrap:balance}
+h2 em{font-style:normal;color:var(--accent)}
+.section{padding:clamp(64px,9vw,128px) 0;position:relative}
+.section__head{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:32px 64px;align-items:end;margin-bottom:clamp(36px,5vw,64px)}
+.section__sub{color:var(--text-dim);font-size:17px;line-height:1.5;max-width:46ch}
+.lede{font-size:clamp(18px,1.8vw,22px);line-height:1.45;color:#fff;max-width:56ch}
+.lede+p{margin-top:18px;font-size:16.5px;line-height:1.55;color:var(--text-dim);max-width:60ch}
+.textlink{display:inline-block;margin-top:28px;font-size:15px;font-weight:600;color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(var(--accent-rgb),.35);padding-bottom:2px}
+.textlink:hover{border-bottom-color:var(--accent)}
+
+.cta{
+  display:flex;align-items:center;justify-content:center;gap:9px;width:100%;
+  background:var(--accent);color:#0B0B0B;border:2px solid var(--accent);border-radius:999px;
+  padding:15px 26px;font-size:15.5px;font-weight:600;white-space:nowrap;cursor:pointer;text-decoration:none;
+  transition:background .15s,transform .1s,border-color .15s,color .15s;
+}
+.cta svg{width:16px;height:16px;stroke:currentColor;stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.cta:hover{background:#fff;border-color:#fff}
+.cta:active{transform:scale(.985)}
+.cta:disabled{cursor:not-allowed;background:var(--surface-hi);color:var(--text-faint);border-color:var(--input-border)}
+.cta.is-busy:disabled{background:var(--accent);border-color:var(--accent);color:#0B0B0B;opacity:.6;cursor:wait}
+.attention{
+  position:relative;overflow:hidden;color:#0B0B0B;border-color:transparent;
+  background:linear-gradient(var(--accent),var(--accent)) padding-box,
+             linear-gradient(110deg,#fff,var(--accent),#fff,var(--accent),#fff) border-box;
+  background-size:100% 100%,300% 100%;
+  animation:shine-border 2.6s linear infinite;
+}
+.attention::after{
+  content:"";position:absolute;inset:0;transform:translateX(-150%) skew(-20deg);
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.55),transparent);
+  animation:shine-sweep 2.6s ease-in-out infinite;pointer-events:none;
+}
+@keyframes shine-border{to{background-position:0 0,300% 0}}
+@keyframes shine-sweep{55%,to{transform:translateX(150%) skew(-20deg)}}
+
+/* ---------- what MAKE.EXE is ----------
+   Set on the invite's own artwork: the big MAKE.EXE letterforms, ghosted. */
+.section--dark{background:#070707 url(../img/texture.jpg) center/cover no-repeat;border-top:1px solid var(--input-border);border-bottom:1px solid var(--input-border)}
+.section--dark::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,5,5,.86),rgba(5,5,5,.55))}
+.section--dark>.wrap{position:relative}
+.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:40px 80px;align-items:start}
+.split__lead{position:sticky;top:40px}
+.stats{list-style:none;margin-top:36px;display:grid;grid-template-columns:repeat(4,1fr);gap:18px;border-top:1px solid rgba(255,255,255,.14);padding-top:26px}
+.stats b{display:block;font-family:var(--display);font-weight:400;font-size:clamp(40px,4.6vw,64px);line-height:.9;color:#fff}
+.stats span{display:block;margin-top:8px;font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-dim);line-height:1.4}
+
+/* ---------- the evening: timeline + what to expect ---------- */
+.timeline{list-style:none;display:grid;gap:0;border-top:1px solid var(--input-border)}
+.timeline li{display:grid;grid-template-columns:150px minmax(0,1fr);gap:16px 40px;padding:28px 0;border-bottom:1px solid var(--input-border);align-items:start}
+.timeline__t{font-family:var(--mono);font-size:15px;font-weight:700;letter-spacing:.06em;color:var(--accent);padding-top:5px;font-variant-numeric:tabular-nums}
+.timeline h3{font-size:clamp(20px,2vw,26px);font-weight:600;letter-spacing:-.02em;line-height:1.15}
+.timeline p{margin-top:8px;font-size:16px;line-height:1.55;color:var(--text-dim);max-width:66ch}
+
+.expect{margin-top:clamp(36px,5vw,64px);display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.expect article{padding:26px 24px 28px;border:1px solid var(--input-border);border-radius:18px;background:var(--card);display:flex;flex-direction:column;gap:12px;position:relative;overflow:hidden}
+.expect article::before{content:"";position:absolute;left:24px;top:0;width:36px;height:2px;background:var(--accent)}
+.expect h3{font-size:18px;font-weight:600;letter-spacing:-.015em;margin-top:8px}
+.expect p{font-size:15px;line-height:1.55;color:var(--text-dim)}
+
+/* ---------- the room: skyline with the guest list over it ---------- */
+.room{overflow:hidden;isolation:isolate;min-height:560px;display:flex;align-items:center}
+.room__img{position:absolute;inset:0;z-index:-2;width:100%;height:100%;object-fit:cover;object-position:50% 45%}
+.room::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(5,5,5,.94) 0%,rgba(5,5,5,.8) 50%,rgba(5,5,5,.45) 100%),linear-gradient(180deg,var(--bg),transparent 18%,transparent 82%,var(--bg))}
+.room__in{width:100%}
+.room .lede{margin-top:24px;max-width:52ch;color:rgba(255,255,255,.9)}
+.room__hosts{margin-top:36px;display:flex;gap:40px;flex-wrap:wrap}
+.room__hosts div{display:flex;flex-direction:column;gap:5px;padding-left:14px;border-left:1px solid rgba(255,255,255,.28)}
+.room__hosts b{font-family:var(--mono);font-size:11.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--accent)}
+.room__hosts span{font-size:15.5px;font-weight:500}
+
+/* ---------- rsvp: on Huge's own grain ---------- */
+.rsvp{background:#050505 url(../img/huge-grain.jpg) center/cover no-repeat;border-top:1px solid var(--input-border)}
+.rsvp::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,var(--bg),rgba(5,5,5,.6) 30%,rgba(5,5,5,.7))}
+.rsvp>.wrap{position:relative}
+.signup{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:48px;align-items:start}
+.form{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.field{display:flex;flex-direction:column;gap:7px;min-width:0}
+.field--wide{grid-column:1/-1}
+.field>span{font-weight:600;font-size:14px;letter-spacing:.01em}
+.field>span small{font-weight:500;color:var(--text-faint);margin-left:6px}
+.field input{
+  width:100%;background:var(--input-bg);border:1px solid var(--input-border);border-radius:10px;
+  color:var(--text);font-size:16px;padding:13px 15px;outline:none;transition:border-color .15s,box-shadow .15s;
+}
+.field input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(var(--accent-rgb),.14)}
+.field input::placeholder{color:#4A4A4A}
+.field .hint{font-size:12.5px;color:var(--text-faint)}
+.field input:user-invalid{border-color:#C43F3F}
+.consent{grid-column:1/-1;margin-top:8px;padding-top:16px;border-top:1px solid var(--input-border);font-size:13px;line-height:1.5;color:var(--text-dim);max-width:70ch}
+.consent a{color:#fff;text-decoration:underline;text-underline-offset:2px}
+.consent a:hover{color:var(--accent)}
+
+.aside{position:sticky;top:24px;display:flex;flex-direction:column;gap:16px;
+  padding:22px;background:rgba(14,14,14,.9);border:1px solid var(--input-border);border-radius:18px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.aside h3{font-family:var(--mono);font-size:11.5px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--text-faint)}
+.seat{display:flex;flex-direction:column;gap:4px;font-size:14.5px;color:var(--text-dim)}
+.seat b{font-size:18px;font-weight:600;letter-spacing:-.01em;color:#fff;margin-bottom:4px}
+.fine{font-size:12.5px;line-height:1.5;color:var(--text-faint)}
+.status{font-size:14px;line-height:1.45;color:#F0A0A0;padding:12px 14px;border:1px solid #4A2222;border-radius:10px;background:#160A0A}
+
+/* ---------- sticky bar (phones only) ---------- */
+.bar{
+  position:fixed;left:0;right:0;bottom:0;z-index:30;display:none;
+  background:rgba(5,5,5,.8);backdrop-filter:blur(16px) saturate(140%);-webkit-backdrop-filter:blur(16px) saturate(140%);
+  border-top:1px solid rgba(255,255,255,.08);
+}
+.bar__in{max-width:var(--measure);margin:0 auto;padding:10px var(--gutter) calc(10px + env(safe-area-inset-bottom));display:flex;align-items:center;justify-content:space-between;gap:12px}
+.bar__summary{font-family:var(--mono);font-size:12px;color:var(--text-dim);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bar__cta{width:auto;flex:0 0 auto;padding:12px 18px;font-size:14px}
+
+/* ---------- done ---------- */
+.done{max-width:calc(760px + 2 * var(--gutter));position:relative}
+.done>p{margin-top:18px;font-size:17px;line-height:1.5;color:var(--text-dim);max-width:52ch}
+.done>p b{color:#fff;font-weight:600}
+.done ul{list-style:none;margin-top:30px;display:flex;flex-direction:column;gap:12px}
+.done li{
+  display:grid;grid-template-columns:1fr auto;grid-template-areas:"when cal" "title cal" "where cal";gap:3px 20px;align-items:center;
+  padding:18px 20px;border:1px solid var(--input-border);border-radius:14px;background:var(--card);
+}
+.done__when{grid-area:when;font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+.done li strong{grid-area:title;font-size:20px;letter-spacing:-.02em}
+.done li strong em{font-style:normal;font-weight:500;color:var(--text-dim)}
+.done__where{grid-area:where;font-size:14px;color:var(--text-dim)}
+.done__cal{grid-area:cal;font-size:13px;font-weight:600;color:#fff;text-decoration:none;padding:9px 14px;border-radius:999px;border:1px solid var(--input-border);white-space:nowrap}
+.done__cal:hover{border-color:var(--accent);color:var(--accent)}
+.done__next{margin-top:34px;display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.done__next .cta{width:auto}
+.done__preview{margin-top:24px;font-size:13px;color:var(--text-faint)}
+
+/* ---------- footer ---------- */
+.foot{padding:32px var(--gutter) 44px;border-top:1px solid var(--input-border);display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;font-size:13px;color:var(--text-dim)}
+.foot a,.foot a:visited{color:#fff;text-decoration:none}
+.foot a:hover{color:var(--accent)}
+a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!important}
+
+/* ---------- phones & tablets ---------- */
+@media (max-width:900px){
+  .split{grid-template-columns:1fr}
+  .split__lead{position:static}
+  .stats{grid-template-columns:1fr 1fr}
+  .expect{grid-template-columns:1fr}
+  .section__head{grid-template-columns:1fr;align-items:start}
+  .signup{grid-template-columns:1fr;gap:28px}
+  .aside{position:static}
+  .aside .cta{display:none}
+  .bar{display:block}
+  body.has-bar{padding-bottom:80px}
+}
+@media (max-width:720px){
+  .hero{min-height:100svh}
+  .hero__img{object-position:50% 30%}
+  .hero__body{padding-top:40px;padding-bottom:110px}
+  .hero h1{font-size:clamp(72px,24vw,120px);flex-direction:column;line-height:.84}
+  .hero__sub{font-size:16.5px}
+  .facts{grid-template-columns:1fr;gap:14px;margin-top:26px}
+  .facts dd{font-size:16px}
+  .hero__mark{width:120px;bottom:24px;right:20px}
+  .hero__cta{margin-top:26px}
+  .hero__cta .cta{flex:1 1 100%}
+  .lockup{gap:12px}
+  .lockup__huge svg{height:24px}
+  .lockup__ddx{height:18px}
+  .lockup__sep{height:24px}
+  .timeline li{grid-template-columns:1fr;gap:6px;padding:22px 0}
+  .timeline__t{padding-top:0}
+  .form{grid-template-columns:1fr}
+  .room{min-height:0}
+  .room__hosts{gap:18px}
+  .done li{grid-template-columns:1fr;grid-template-areas:"when" "title" "where" "cal";gap:4px}
+  .done__cal{justify-self:start;margin-top:8px}
+  .foot{flex-direction:column;align-items:flex-start}
+}
+
+/* ============================================================
+   Motion. Transform and opacity only, inside the reduced-motion guard.
+   The hero waits for .ready so it assembles once; everything below the
+   fold rises in as it scrolls into view.
+   ============================================================ */
+@media (prefers-reduced-motion:no-preference){
+  @keyframes rise{from{opacity:0;transform:translate3d(0,18px,0)}to{opacity:1;transform:none}}
+  @keyframes deal{from{opacity:0;transform:translate3d(-14px,6px,0)}to{opacity:1;transform:none}}
+  @keyframes drift{from{transform:scale(1.04)}to{transform:scale(1.12)}}
+  @keyframes wash{from{opacity:0}to{opacity:1}}
+  @keyframes markin{from{opacity:0;transform:translate3d(0,12px,0) scale(.96)}to{opacity:.95;transform:none}}
+
+  body:not(.ready) .hero__top,body:not(.ready) .hero__body>*,body:not(.ready) .hero__mark{opacity:0}
+  body:not(.ready) .hero__img{opacity:0}
+  body.ready .hero__img{animation:wash 1.1s ease-out both,drift 22s ease-out .2s both}
+  body.ready .hero__top{animation:rise .6s cubic-bezier(.22,.8,.25,1) .15s both}
+  body.ready .hero__body>*{animation:deal .55s cubic-bezier(.22,.8,.25,1) both;animation-delay:calc(var(--i,0)*90ms + 260ms)}
+  body.ready .hero__mark{animation:markin .8s cubic-bezier(.22,.8,.25,1) .7s both}
+
+  .reveal{opacity:0;transform:translate3d(0,22px,0);transition:opacity .7s cubic-bezier(.22,.8,.25,1),transform .7s cubic-bezier(.22,.8,.25,1);transition-delay:var(--d,0ms)}
+  .reveal.in{opacity:1;transform:none}
+
+  .cta{transition:background .18s,color .18s,border-color .18s,transform .18s cubic-bezier(.22,.8,.25,1),box-shadow .22s}
+  .cta:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(var(--accent-rgb),.25)}
+  .cta:active{transform:translateY(0) scale(.985)}
+  .cta svg{transition:transform .22s cubic-bezier(.22,.8,.25,1)}
+  .cta:hover svg{transform:translateX(3px)}
+  .cta:disabled:hover{transform:none;box-shadow:none}
+  .hero__pill,.ghost,.done__cal{transition:border-color .18s,color .18s,transform .18s}
+  .hero__pill:hover,.ghost:hover,.done__cal:hover{transform:translateY(-1px)}
+  .expect article{transition:border-color .25s,transform .35s cubic-bezier(.22,.9,.25,1)}
+  .expect article:hover{border-color:rgba(var(--accent-rgb),.5);transform:translateY(-4px)}
+  .textlink,.foot a{transition:color .2s,border-color .2s}
+}
+@media (prefers-reduced-motion:reduce){
+  .attention,.attention::after{animation:none}
+  html{scroll-behavior:auto}
+  .reveal{opacity:1;transform:none}
+}
+
+/* ---------- 2025 in pictures ----------
+   Huge's own photographs of the first edition. Seven frames of mixed
+   orientation, so the grid fixes the row height and lets object-fit do the
+   cropping; each row's spans add up to six. */
+.keyart{margin:0 0 clamp(36px,5vw,64px);border-radius:20px;overflow:hidden;border:1px solid rgba(255,255,255,.1);position:relative}
+.keyart img{width:100%;height:auto;display:block}
+
+.gallery{
+  margin-top:clamp(48px,6vw,80px);position:relative;
+  display:grid;grid-template-columns:repeat(6,1fr);
+  grid-auto-rows:clamp(180px,20vw,290px);gap:12px;
+}
+.gallery figure{position:relative;margin:0;overflow:hidden;border-radius:16px;background:#111;border:1px solid rgba(255,255,255,.08)}
+.gallery img{width:100%;height:100%;object-fit:cover;display:block}
+.gallery figure::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,5,5,0) 55%,rgba(5,5,5,.8) 100%);pointer-events:none}
+.gallery figcaption{position:absolute;left:16px;right:16px;bottom:14px;z-index:1;font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:#fff}
+/* Rows of six: 4+2, 2+2+2, 2+4. */
+.gal__a{grid-column:span 4}
+.gal__b{grid-column:span 2}
+.gal__c,.gal__d,.gal__e{grid-column:span 2}
+.gal__f{grid-column:span 2}
+.gal__g{grid-column:span 4}
+/* The two portrait frames carry their subject high. */
+.gal__f img,.gal__g img{object-position:50% 40%}
+
+@media (max-width:900px){
+  .gallery{grid-template-columns:repeat(2,1fr);grid-auto-rows:clamp(145px,33vw,215px);gap:8px}
+  .gallery figure{grid-column:span 1!important}
+  .gal__a,.gal__g{grid-column:span 2!important}
+  .gallery figcaption{font-size:10.5px;left:12px;bottom:10px}
+}
+@media (prefers-reduced-motion:no-preference){
+  .gallery img{transition:transform 1.4s cubic-bezier(.22,.8,.25,1),filter .5s}
+  .gallery figure:hover img{transform:scale(1.06);filter:brightness(1.08) saturate(1.1)}
+  .keyart img{transition:transform 1.6s cubic-bezier(.22,.8,.25,1)}
+  .keyart:hover img{transform:scale(1.02)}
+}
+
+/* ---------- the DDX logo wall ----------
+   Marks come in wildly different proportions, so each sits in a fixed box and
+   is contained inside it: one optical size, no stretching. Flex rather than
+   grid because 22 marks never divide evenly — the short last row centres
+   itself instead of hanging off to the left. Greyscale at rest like DDX's own
+   strip, full colour weight on hover.
+
+   NB: height is set on the image and width left auto, so `max-width` must not
+   be allowed to squeeze the width independently — that squashes wide marks.
+   The flex basis gives every cell the same box; the image is contained in it. */
+.brands{border-top:1px solid var(--input-border)}
+.wall{
+  list-style:none;display:flex;flex-wrap:wrap;justify-content:center;gap:4px;
+  border:1px solid var(--input-border);border-radius:20px;padding:14px;background:var(--card);
+}
+.wall li{
+  flex:0 1 calc(100% / 6 - 4px);
+  display:grid;place-items:center;padding:22px 14px;border-radius:12px;min-width:0;
+}
+.wall img{
+  width:auto;height:clamp(20px,2.1vw,30px);max-width:100%;object-fit:contain;
+  opacity:.62;filter:grayscale(1);
+}
+/* Round and stacked marks need more height to carry the same optical weight. */
+.wall .is-tall img{height:clamp(28px,2.9vw,42px)}
+/* These four were lifted out of the faded bottom row of DDX's strip; their
+   strokes are thinner, so they need a little more presence to match. */
+.wall .is-faint img{opacity:.82}
+
+@media (max-width:900px){
+  .wall{gap:2px;padding:8px}
+  .wall li{flex:0 1 calc(100% / 3 - 2px);padding:18px 10px}
+  .wall img{height:clamp(18px,3.6vw,24px)}
+  .wall .is-tall img{height:clamp(26px,5vw,34px)}
+}
+@media (max-width:480px){
+  .wall li{flex:0 1 calc(50% - 2px)}
+}
+@media (prefers-reduced-motion:no-preference){
+  .wall img{transition:opacity .3s,filter .3s,transform .3s cubic-bezier(.22,.8,.25,1)}
+  .wall li:hover img{opacity:1;filter:grayscale(0) brightness(1.15);transform:scale(1.06)}
+}
+
+/* ---------- and the rest ----------
+   Names rather than marks: these came out of DDX's own ticket records, and a
+   wall of 50 logos would read as noise where a list reads as reach. */
+.more{margin-top:26px;display:flex;flex-wrap:wrap;align-items:baseline;gap:10px 14px}
+.more__lead{
+  font-family:var(--mono);font-size:11.5px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--text-faint);flex:0 0 auto;
+}
+.more__list{list-style:none;display:flex;flex-wrap:wrap;gap:7px 0;align-items:baseline;min-width:0}
+.more__list li{font-size:14.5px;line-height:1.5;color:var(--text-dim);white-space:nowrap}
+.more__list li+li::before{
+  content:"";display:inline-block;vertical-align:middle;
+  width:3px;height:3px;border-radius:50%;background:var(--accent);opacity:.55;margin:0 11px;
+}
+@media (max-width:720px){
+  .more{margin-top:20px;gap:8px 10px}
+  .more__list li{font-size:13.5px}
+  .more__list li+li::before{margin:0 8px}
+}
+
+/* ---------- the hospitality floor ----------
+   Huge's own photographs of the MAKE.EXE hour in Los Angeles: drinks, food,
+   the build, the room. They sit under "what to expect" because they are the
+   evidence for it. Six frames, mixed orientation — a fixed row height with
+   object-fit cover lets the landscape and portrait shots share a rhythm
+   without any of them being squashed. */
+.shots{margin-top:clamp(40px,5vw,64px)}
+.shots__lead{
+  font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--text-faint);margin-bottom:16px;
+}
+.shots__lead span{color:var(--accent);font-weight:700}
+.shots__grid{
+  display:grid;grid-template-columns:repeat(6,1fr);
+  grid-auto-rows:clamp(190px,21vw,300px);gap:10px;
+}
+.shots figure{margin:0;overflow:hidden;border-radius:16px;background:#111;border:1px solid rgba(255,255,255,.08);position:relative}
+.shots img{width:100%;height:100%;object-fit:cover;display:block}
+/* Three rows, each summing to six: 3+3, 4+2, 2+4. */
+.shots__a{grid-column:span 3}
+.shots__b{grid-column:span 3}
+.shots__c{grid-column:span 4}
+.shots__d{grid-column:span 2}
+.shots__e{grid-column:span 2}
+.shots__f{grid-column:span 4}
+/* All shot portrait and cropped to wide boxes, so each one is pinned to where
+   its subject actually sits: the bartenders low in frame, the rest higher. */
+.shots__a img{object-position:50% 64%}
+.shots__d img,.shots__f img{object-position:50% 38%}
+
+@media (max-width:900px){
+  .shots__grid{grid-template-columns:repeat(2,1fr);grid-auto-rows:clamp(150px,34vw,220px);gap:8px}
+  .shots figure{grid-column:span 1!important}
+  .shots__c{grid-column:span 2!important}
+}
+@media (prefers-reduced-motion:no-preference){
+  .shots img{transition:transform 1.4s cubic-bezier(.22,.8,.25,1),filter .5s}
+  .shots figure:hover img{transform:scale(1.06);filter:brightness(1.06) saturate(1.08)}
+}
+
+/* ---------- getting there ----------
+   A dark OpenStreetMap render beside the address, so nobody has to go hunting
+   for the door. The map is a link: tapping it opens the real thing. */
+.venue{border-top:1px solid var(--input-border)}
+.venue__grid{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:10px;align-items:stretch}
+.venue__map{position:relative;display:block;border-radius:18px;overflow:hidden;border:1px solid var(--input-border);background:#0B0B0B;min-height:100%}
+.venue__map img{width:100%;height:100%;object-fit:cover;display:block}
+.venue__open{
+  position:absolute;right:14px;bottom:14px;z-index:1;
+  font-size:12px;font-weight:600;letter-spacing:.04em;color:#0B0B0B;background:var(--accent);
+  padding:9px 14px;border-radius:999px;
+}
+.venue__facts{display:flex;flex-direction:column;justify-content:center;gap:22px;padding:28px 26px;border:1px solid var(--input-border);border-radius:18px;background:var(--card)}
+.venue__facts div{padding-left:14px;border-left:1px solid var(--input-border)}
+.venue__facts dt{font-family:var(--mono);font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:7px}
+.venue__facts dd{font-size:16px;line-height:1.5;color:#fff}
+.venue__credit{margin-top:18px;font-size:11.5px;color:var(--text-faint)}
+@media (max-width:900px){ .venue__grid{grid-template-columns:1fr} .venue__map{min-height:0;aspect-ratio:3/2} }
+@media (prefers-reduced-motion:no-preference){
+  .venue__map img{transition:transform 1.2s cubic-bezier(.22,.8,.25,1),filter .4s}
+  .venue__map:hover img{transform:scale(1.03);filter:brightness(1.15)}
+  .venue__open{transition:transform .2s}
+  .venue__map:hover .venue__open{transform:translateY(-2px)}
+}
+/* Two frames, one row, same box — a fixed row height plus object-fit, so the
+   strip stays even whatever the source crop. */
+/* Spring only publishes one usable room shot, so it runs full width
+   rather than being padded out with a still life. */
+.venue__shots{display:grid;grid-template-columns:repeat(6,1fr);grid-auto-rows:clamp(200px,23vw,320px);gap:10px;margin-bottom:12px}
+/* Two rows, each summing six: the private table + the dining room, then
+   Somerset House at night, a Spring still life and the courtyard by day. */
+.vs__a{grid-column:span 2}.vs__b{grid-column:span 4}
+.vs__c,.vs__d,.vs__e{grid-column:span 2}
+.vs__d img{object-position:50% 58%}
+.venue__shots figure{margin:0;overflow:hidden;border-radius:18px;border:1px solid var(--input-border);background:#111}
+.venue__shots img{width:100%;height:100%;object-fit:cover;display:block}
+@media (max-width:900px){
+  .venue__shots{grid-template-columns:repeat(2,1fr);grid-auto-rows:clamp(150px,34vw,220px)}
+  .venue__shots figure{grid-column:span 1!important}
+  .vs__b{grid-column:span 2!important}
+}
+@media (prefers-reduced-motion:no-preference){
+  .venue__shots img{transition:transform 1.3s cubic-bezier(.22,.8,.25,1)}
+  .venue__shots figure:hover img{transform:scale(1.05)}
+}
+
+/* The printed DDX invitation, from the partnerships deck. Native 512×342, so
+   it sits at the width of the aside column and is never blown up. */
+.aside__card{margin:0 0 4px;border-radius:14px;overflow:hidden;border:1px solid var(--input-border);background:#111;aspect-ratio:3/2}
+.aside__card img{width:100%;height:100%;object-fit:cover;display:block}
+@media (max-width:900px){ .aside__card{max-width:420px} }
+
+/* Eight frames: six DDX dinner photographs plus the roundtable and the
+   table conversation from the DDX partnerships deck. Rows sum to six:
+   4+2 / 2+2+2 / 2+2+2. */
+.shots__a{grid-column:span 4}
+.shots__b,.shots__c,.shots__d,.shots__e,.shots__f,.shots__g,.shots__h{grid-column:span 2}
+.shots__b img{object-position:50% 46%}
+@media (max-width:900px){
+  .shots__grid figure{grid-column:span 1!important}
+  .shots__a{grid-column:span 2!important}
+}
