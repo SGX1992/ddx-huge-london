@@ -1,0 +1,531 @@
+/* Huge × DDX — London VIP Dinner Roundtable.
+   Huge brand restyle, 2026-11-04. The NYC page keeps style.css; this file is
+   London's alone, so the two can diverge without breaking each other.
+
+   The brief in one line: cream page, black type, one magenta button. No dark
+   sections, no uppercase, no italics, no gradients, left-aligned throughout. */
+
+/* ---------- Huge Matter ----------
+   The brief asks for Huge Matter site-wide, but the font files were not
+   supplied with it, so the three @font-face rules below are disabled: live,
+   each one would fire a 404 on every visit. Put the .woff2 files into
+   assets/fonts/ and remove the comment markers around the block to switch the
+   whole page over — nothing else changes. Until then the stack resolves past
+   the missing family to Poppins, the fallback the brief names.
+
+   (Careful when editing this note: a literal comment terminator inside it ends
+   the block early and silently kills the rest of the stylesheet. It happened.)
+
+@font-face {
+  font-family: 'Huge Matter';
+  src: url('../fonts/HugeMatter-Regular.woff2') format('woff2');
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Huge Matter';
+  src: url('../fonts/HugeMatter-Medium.woff2') format('woff2');
+  font-weight: 500; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Huge Matter';
+  src: url('../fonts/HugeMatter-SemiBold.woff2') format('woff2');
+  font-weight: 600; font-style: normal; font-display: swap;
+}
+*/
+
+:root {
+  --cream: #F7F4EE;
+  --white: #FFFFFF;
+  --ink: #000000;
+  --magenta: #FF0090;
+  --rule: #DCE1EB;
+  --placeholder: #6D737F;
+  --font: 'Huge Matter', 'Poppins', system-ui, -apple-system, sans-serif;
+  --wrap: 1180px;
+  --pad: clamp(20px, 5vw, 56px);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--font);
+  font-weight: 600;                 /* SemiBold is the default */
+  font-size: 17px;
+  line-height: 1.55;
+  letter-spacing: -0.03em;
+  text-align: left;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* No italics anywhere, including the <em>s left in the copy. */
+em, i { font-style: normal; }
+
+img, svg { max-width: 100%; }
+a { color: var(--ink); }
+
+h1, h2, h3 {
+  margin: 0;
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.05em;
+}
+
+p { margin: 0; }
+
+.wrap { width: min(100% - var(--pad) * 2, var(--wrap)); margin-inline: auto; }
+
+/* Dev-only, hidden unless the endpoint is empty. Deliberately not magenta:
+   the brief reserves that for the primary button. */
+.preview-bar {
+  background: var(--white); color: var(--ink);
+  border-bottom: 1px solid var(--rule);
+  font-weight: 500; font-size: 14px; line-height: 1.5;
+  padding: 10px var(--pad);
+}
+
+/* ---------- hero ----------
+   No background image and no overlay: the headline sits on the cream. */
+.hero { padding: 26px 0 clamp(30px, 5vw, 54px); }
+
+.hero__top {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 20px; flex-wrap: wrap;
+  padding-bottom: clamp(34px, 6vw, 70px);
+}
+
+.lockup { display: flex; align-items: center; gap: 14px; }
+.lockup__huge { display: block; color: var(--ink); }   /* the SVG is currentColor */
+.lockup__huge svg { display: block; height: 26px; width: auto; }
+.lockup__sep { display: block; width: 1px; height: 22px; background: var(--rule); }
+.lockup__ddx { display: block; height: 21px; width: auto; }
+.lockup--small .lockup__huge svg { height: 21px; }
+.lockup--small .lockup__ddx { height: 17px; }
+
+.hero__pill {
+  padding: 9px 20px; border: 1px solid var(--ink); border-radius: 999px;
+  font-size: 14px; font-weight: 600; text-decoration: none;
+}
+
+.eyebrow {
+  display: flex; align-items: center; flex-wrap: wrap; gap: 10px;
+  margin-bottom: clamp(18px, 2.6vw, 28px);
+  font-size: 14px; font-weight: 500; letter-spacing: -0.02em;
+}
+.eyebrow i { width: 7px; height: 7px; border-radius: 50%; background: var(--ink); }
+.eyebrow span + span { padding-left: 10px; border-left: 1px solid var(--rule); }
+
+h1 {
+  font-size: clamp(46px, 9vw, 112px);
+  line-height: 1.0;
+  max-width: 14ch;
+}
+.h1__a, .h1__b { color: var(--ink); }   /* the magenta gradient is gone */
+
+.facts {
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(18px, 3vw, 40px);
+  margin: clamp(30px, 4.5vw, 52px) 0 clamp(26px, 4vw, 44px);
+  padding-top: clamp(22px, 3vw, 34px);
+  border-top: 1px solid var(--rule);
+}
+.facts div { min-width: 0; }
+.facts dt {
+  margin-bottom: 6px;
+  font-size: 13px; font-weight: 500; letter-spacing: -0.02em;
+}
+.facts dd { margin: 0; font-size: clamp(16px, 1.5vw, 19px); line-height: 1.4; }
+.facts dd small { display: block; font-weight: 400; font-size: 14px; line-height: 1.5; }
+
+.hero__cta { display: flex; flex-wrap: wrap; gap: 12px; }
+
+/* ---------- buttons ---------- */
+.cta, .ghost {
+  display: inline-flex; align-items: center; gap: 9px;
+  padding: 15px 28px; border-radius: 999px;
+  font-family: inherit; font-size: 16px; font-weight: 600; letter-spacing: -0.03em;
+  text-decoration: none; cursor: pointer;
+}
+.cta {
+  background: var(--magenta); color: var(--ink);
+  border: 1px solid var(--magenta);
+}
+.cta svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; }
+.ghost { background: transparent; color: var(--ink); border: 1px solid var(--ink); }
+.cta:disabled { cursor: default; opacity: .55; }
+
+/* ---------- the RSVP section, straight under the hero ---------- */
+.rsvp { padding: clamp(34px, 5vw, 64px) 0 clamp(44px, 6vw, 80px); }
+.rsvp > .wrap { border-top: 1px solid var(--rule); padding-top: clamp(30px, 4.5vw, 56px); }
+
+.section__head { margin-bottom: clamp(24px, 3.5vw, 40px); }
+.kicker { margin-bottom: 10px; font-size: 13px; font-weight: 500; letter-spacing: -0.02em; }
+.section__head h2 { font-size: clamp(34px, 5.2vw, 58px); max-width: 16ch; }
+.section__sub {
+  margin-top: 14px; max-width: 54ch;
+  font-weight: 400; line-height: 1.6;
+}
+
+/* two columns on desktop, stacked on mobile */
+.signup { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: clamp(16px, 2.2vw, 28px); align-items: start; }
+.form { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+
+.field { display: flex; flex-direction: column; gap: 7px; min-width: 0; }
+.field--wide { grid-column: 1 / -1; }
+.field > span { font-size: 14px; font-weight: 500; letter-spacing: -0.02em; }
+.field > span small { font-weight: 400; }
+.field input {
+  width: 100%; padding: 14px 16px;
+  background: var(--white); color: var(--ink);
+  border: 1px solid var(--ink); border-radius: 14px;
+  font-family: inherit; font-size: 16px; font-weight: 400; letter-spacing: -0.03em;
+}
+.field input::placeholder { color: var(--placeholder); font-weight: 400; }
+.field input:focus-visible { outline: 2px solid var(--ink); outline-offset: 1px; }
+.hint { font-size: 13px; font-weight: 400; line-height: 1.5; }
+
+.consent {
+  grid-column: 1 / -1;
+  font-size: 13px; font-weight: 400; line-height: 1.6;
+}
+.consent a { color: var(--ink); }
+
+/* the "your seat" card */
+.aside {
+  display: flex; flex-direction: column; gap: 14px;
+  padding: clamp(20px, 2.4vw, 28px);
+  background: var(--white); border: 1px solid var(--ink); border-radius: 20px;
+}
+.aside h3 { font-size: 20px; }
+.aside__card { margin: 0; border-radius: 14px; overflow: hidden; }
+.aside__card img { display: block; width: 100%; height: auto; }
+.seat { display: flex; flex-direction: column; gap: 4px; font-size: 15px; }
+.seat b { font-weight: 600; }
+.seat span { font-weight: 400; }
+.aside .cta { justify-content: center; }
+.fine { font-size: 13px; font-weight: 400; line-height: 1.55; }
+.status {
+  padding: 12px 14px; border: 1px solid var(--ink); border-radius: 14px;
+  font-size: 14px; font-weight: 400; line-height: 1.5;
+}
+
+/* ---------- the confirmation ---------- */
+.done { display: flex; flex-direction: column; gap: 18px; align-items: flex-start; }
+.done h2 { font-size: clamp(32px, 4.6vw, 54px); }
+.done > p { max-width: 58ch; font-weight: 400; line-height: 1.6; }
+.done ul { margin: 0; padding: 0; list-style: none; }
+.done li {
+  display: flex; flex-direction: column; gap: 6px; align-items: flex-start;
+  padding: clamp(18px, 2.2vw, 26px);
+  background: var(--white); border: 1px solid var(--ink); border-radius: 20px;
+}
+.done__when, .done__where { font-size: 14px; font-weight: 400; }
+.done li strong { font-size: 19px; font-weight: 600; }
+.done__cal { margin-top: 8px; font-size: 14px; font-weight: 500; }
+.done__preview { font-size: 13px; font-weight: 400; }
+
+/* ---------- footer ---------- */
+.foot {
+  display: flex; flex-direction: column; gap: 12px; align-items: flex-start;
+  padding: clamp(26px, 3.5vw, 40px) 0 clamp(90px, 10vw, 110px);
+  border-top: 1px solid var(--rule);
+  font-size: 14px; font-weight: 400;
+}
+.foot .lockup { margin-bottom: 4px; }
+
+/* ---------- the sticky bar ---------- */
+.bar {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 20;
+  background: var(--cream); border-top: 1px solid var(--rule);
+}
+.bar__in {
+  width: min(100% - var(--pad) * 2, var(--wrap)); margin-inline: auto;
+  display: flex; align-items: center; justify-content: space-between; gap: 14px;
+  padding: 12px 0;
+}
+.bar__summary { font-size: 14px; font-weight: 500; }
+.bar__cta { padding: 12px 22px; font-size: 15px; }
+body.has-bar { padding-bottom: 0; }
+
+/* ---------- motion ---------- */
+.reveal { opacity: 0; transform: translateY(14px); }
+.reveal.in { opacity: 1; transform: none; transition: opacity .5s ease var(--d, 0ms), transform .5s ease var(--d, 0ms); }
+@media (prefers-reduced-motion: reduce) {
+  .reveal, .reveal.in { opacity: 1; transform: none; transition: none; }
+}
+
+/* ---------- mobile ---------- */
+@media (max-width: 860px) {
+  .signup { grid-template-columns: 1fr; }
+  .form { grid-template-columns: 1fr; }
+  .facts { grid-template-columns: 1fr; gap: 16px; }
+  .hero__cta .cta, .hero__cta .ghost { flex: 1 1 auto; justify-content: center; }
+  .bar__summary { display: none; }
+  .bar__cta { width: 100%; justify-content: center; }
+}
+
+/* ---------- nur für london-full.html ----------
+   Die Vergleichsfassung mit den Inhalten, die das Briefing gestrichen hatte:
+   Fotos und der Veranstaltungsort, aber im Huge-Look — creme Flächen, weiße
+   Karten, schwarze Ränder, nichts Dunkles, nichts zentriert. Auf der
+   veröffentlichten Seite greifen diese Regeln ins Leere, weil es die Elemente
+   dort nicht gibt. */
+.section { padding: clamp(34px, 5vw, 64px) 0 0; }
+.section > .wrap { border-top: 1px solid var(--rule); padding-top: clamp(30px, 4.5vw, 56px); }
+
+.expect { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.expect article {
+  display: flex; flex-direction: column; gap: 9px;
+  padding: clamp(20px, 2.4vw, 28px);
+  background: var(--white); border-radius: 20px;
+}
+.expect h3 { font-size: 20px; }
+.expect p { font-weight: 400; line-height: 1.6; font-size: 15px; }
+
+.shots { margin-top: clamp(22px, 3vw, 36px); }
+.shots__lead { margin-bottom: 14px; font-size: 14px; font-weight: 500; }
+.shots__grid {
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-auto-rows: clamp(150px, 17vw, 240px); gap: 10px;
+}
+.shots__grid figure { margin: 0; border-radius: 18px; overflow: hidden; }
+.shots__grid img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.venue__shots {
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-auto-rows: clamp(170px, 19vw, 260px); gap: 10px; margin-bottom: 10px;
+}
+.venue__shots figure { margin: 0; border-radius: 18px; overflow: hidden; }
+.venue__shots img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.venue__grid { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 10px; align-items: stretch; }
+.venue__map { position: relative; display: block; border-radius: 20px; overflow: hidden; }
+.venue__map img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.venue__open {
+  position: absolute; right: 14px; bottom: 14px;
+  padding: 10px 18px; border-radius: 999px;
+  background: var(--white);
+  font-size: 13px; font-weight: 600;
+}
+.venue__facts {
+  display: flex; flex-direction: column; justify-content: center; gap: 20px;
+  margin: 0; padding: clamp(20px, 2.4vw, 28px);
+  background: var(--white); border-radius: 20px;   /* ohne Rand, Wunsch 04.11. */
+}
+.venue__facts dt { margin-bottom: 5px; font-size: 13px; font-weight: 500; }
+.venue__facts dd { margin: 0; font-size: 15px; font-weight: 400; line-height: 1.5; }
+.venue__credit { margin-top: 14px; font-size: 13px; font-weight: 400; }
+
+@media (max-width: 860px) {
+  .expect { grid-template-columns: 1fr; }
+  .shots__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .venue__shots { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .venue__shots figure:first-child { grid-column: 1 / -1; }
+  /* minmax(0,…) statt 1fr: ein Grid-Element hat per Default min-width:auto
+     und kann deshalb breiter werden als seine Spalte — hier schob das Bild im
+     Kartenrahmen die Seite um 35px nach rechts. */
+  .venue__grid { grid-template-columns: minmax(0, 1fr); }
+  .venue__map { aspect-ratio: 3 / 2; min-width: 0; min-height: 0; }
+}
+
+/* ---------- Bildanmutung ----------
+   Die Fotos kamen aus der schwarzen Fassung und wirken auf Creme zu kalt und
+   zu kontrastreich. Saettigung leicht runter, einen Hauch Waerme dazu, Kontrast
+   minimal weicher — bewusst KEIN grayscale, die Bilder behalten ihre Farbe.
+   Die Karte ist absichtlich ausgenommen, die soll wie Google Maps aussehen. */
+.full .shots__grid img,
+.full .venue__shots img,
+.full .aside__card img,
+.full .hero__img {
+  filter: saturate(.8) contrast(1.2) brightness(.99);
+}
+
+/* Der Schleier darueber. Die Fotos kommen aus verschiedenen Abenden und
+   Lichtsituationen — mal Kerzenlicht, mal Neonlicht, mal Tageslicht. Ein
+   Filter je Bild korrigiert nur Saettigung und Helligkeit, die Farbstiche
+   bleiben verschieden. Eine getoente Flaeche im Mischmodus soft-light zieht
+   die Buntheit dagegen auf einen gemeinsamen Ton zusammen, ohne die Bilder
+   grau zu machen. Der Ton ist das Creme der Seite, leicht ins Warme gezogen.
+   pointer-events:none, damit Klicks auf die Karte durchgehen. */
+.full .shots__grid figure,
+.full .venue__shots figure,
+.full .aside__card { position: relative; }
+
+.full .shots__grid figure::after,
+.full .venue__shots figure::after,
+.full .aside__card::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: #E8D9C3;
+  mix-blend-mode: soft-light;
+  /* Niedriger als zuerst gewaehlt: der Schleier gleicht die Farben an, nimmt
+     aber Kontrast weg. Der Ausgleich steckt im contrast() oben. */
+  opacity: .38;
+}
+
+/* Eine zweite, sehr schwache Lage im Modus color vereinheitlicht den Buntton
+   selbst — das ist der Teil, der die kalten und die warmen Aufnahmen
+   tatsaechlich auf eine Linie bringt. */
+.full .shots__grid figure::before,
+.full .venue__shots figure::before {
+  content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: #C98B4B;
+  mix-blend-mode: color;
+  opacity: .14;
+}
+
+/* ---------- Google-Karte mit Klick-Guard (nur london-full.html) ---------- */
+.venue__map { position: relative; min-width: 0; min-height: 260px; background: var(--white); }
+.venue__map iframe { display: block; width: 100%; height: 100%; min-height: 320px; border: 0; }
+.venue__map.is-live { aspect-ratio: auto; }
+.venue__consent {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-end;
+  gap: 10px; padding: clamp(18px, 2.2vw, 26px);
+  background: linear-gradient(to top, rgba(247,244,238,.97) 0%, rgba(247,244,238,.88) 42%, rgba(247,244,238,.25) 100%);
+}
+.venue__consent p { max-width: 36ch; font-size: 14px; font-weight: 400; line-height: 1.5; }
+.venue__consent .ghost { padding: 12px 22px; font-size: 15px; }
+.venue__consent .venue__open { position: static; padding: 0; background: none; font-size: 13px; font-weight: 500; }
+
+/* ---------- Sebastians Abweichungen vom Briefing (nur body.full) ----------
+   Huges Briefing schreibt schwarze 1px-Raender auf Karten und Eingaben vor.
+   Sebastian will sie weg (04.11.). Damit der Vergleich zwischen den beiden
+   URLs etwas taugt, bleibt huge.ddxconference.com exakt beim Briefing und nur
+   huge-london.ddxconference.com zeigt diese Fassung.
+   Die Eingaben behalten einen hellgrauen Rand — ganz ohne waeren die weissen
+   Felder auf Creme kaum zu finden. */
+.full .aside,
+.full .done li { border: 0; }
+.full .field input,
+.full .status { border-color: var(--rule); }
+
+/* ---------- Bewegung (nur body.full, Choreografie in motion.js) ----------
+   Startzustaende. Sie stehen bewusst HIER und nicht im Skript: so ist nichts
+   kurz sichtbar, bevor GSAP laedt. Kehrseite ist, dass die Seite ohne
+   JavaScript leer bliebe — deshalb macht motion.js alles sofort sichtbar,
+   wenn GSAP fehlt oder prefers-reduced-motion gesetzt ist. */
+.full .rv { opacity: 0; transform: translateY(32px); }
+.full .rv-l .line { display: block; overflow: hidden; padding-bottom: .08em; margin-bottom: -.08em; }
+.full .rv-l .line span { display: block; transform: translateY(110%); }
+.full .shots__grid img,
+.full .venue__shots img { will-change: transform; }
+
+/* Der Hero-Titel steht jetzt in zwei maskierten Zeilen statt in zwei Spans. */
+.full h1 { max-width: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .full .rv { opacity: 1 !important; transform: none !important; }
+  .full .rv-l .line span { transform: none !important; }
+}
+
+/* ---------- Mobilkorrektur, muss ganz unten stehen ----------
+   Der Google-Karten-Block weiter oben setzt min-height:260px. Zusammen mit
+   aspect-ratio:3/2 ergibt das zwangslaeufig 390px Breite — mehr als die
+   335px, die auf einem 375er Display zur Verfuegung stehen, und die Seite
+   scrollt seitlich. Die Hoehe muss also auf Mobil frei werden. Weil beide
+   Regeln dieselbe Spezifitaet haben, entscheidet die Reihenfolge: diese hier
+   steht bewusst als letzte in der Datei. */
+@media (max-width: 860px) {
+  .venue__map { min-height: 0; min-width: 0; aspect-ratio: 3 / 2; }
+  .venue__map iframe { min-height: 0; height: 100%; }
+}
+
+/* ---------- Das Londoner Cover im Hero (nur body.full) ----------
+   Sebastian wollte das emotionale Aufmacherbild zurueck, das Huges Briefing
+   gestrichen hatte. Es gilt nur hier; huge-london.ddxconference.com bleibt
+   briefing-treu auf Creme.
+
+   Kontrast kommt NICHT aus einem Filter ueber dem ganzen Bild, sondern aus
+   einem Verlauf genau dort, wo Text steht: dunkel unten links, oben ein
+   Hauch fuer die Kopfzeile, und nach unten hin laeuft es in das Creme der
+   Seite aus, damit die Kante zum Rest nicht hart bricht. */
+.full .hero {
+  position: relative; isolation: isolate; overflow: hidden;
+  min-height: 88svh; display: flex; flex-direction: column;
+  padding-bottom: clamp(40px, 6vw, 72px);
+}
+/* NICHT width:100% — das stammte aus dem alten Stylesheet, wo .wrap seinen
+   Rand ueber padding bekam. Hier macht .wrap die Breite selbst, und die
+   Regel hat den Seitenrand im Hero platt gemacht. */
+.full .hero__img {
+  position: absolute; inset: 0; z-index: -2;
+  width: 100%; height: 100%; object-fit: cover; object-position: 50% 42%;
+  transform: scale(1.05); transform-origin: 50% 60%;
+}
+.full .hero::before {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background:
+    /* 1. Der Auslauf ins Creme — eigener Verlauf, der von TRANSPARENTEM Creme
+          nach Creme geht. Von dunklem Grau direkt auf Creme zu interpolieren
+          laeuft durch matschige Zwischentoene und erzeugt auf den letzten
+          Prozent eine sichtbare Kante. Ueber 45 % Hoehe gezogen, damit der
+          Uebergang zur hellen Flaeche nicht abbricht. */
+    linear-gradient(180deg,
+      rgba(247,244,238,0) 55%, rgba(247,244,238,.18) 72%,
+      rgba(247,244,238,.55) 86%, rgba(247,244,238,.88) 95%, var(--cream) 100%),
+    /* 2. Kontrast fuer die Schrift unten links, endet transparent, bevor der
+          Auslauf uebernimmt. */
+    linear-gradient(180deg, rgba(10,10,10,.6) 0%, rgba(10,10,10,.1) 28%,
+                    rgba(10,10,10,.34) 58%, rgba(10,10,10,.52) 78%, rgba(10,10,10,0) 100%),
+    linear-gradient(90deg, rgba(10,10,10,.6) 0%, rgba(10,10,10,.04) 62%);
+}
+.full .hero__body { margin-top: auto; }
+
+/* Alles im Hero wird hell — der Rest der Seite bleibt schwarz auf Creme. */
+.full .hero,
+.full .hero h1,
+.full .hero .facts dt,
+.full .hero .facts dd { color: #fff; }
+.full .hero .eyebrow i { background: #fff; }
+.full .hero .eyebrow span + span,
+.full .hero .facts { border-color: rgba(255,255,255,.3); }
+.full .hero .lockup__huge { color: #fff; }
+.full .hero .lockup__sep { background: rgba(255,255,255,.35); }
+.full .hero__pill { color: #fff; border-color: rgba(255,255,255,.65); }
+.full .hero .ghost { color: #fff; border-color: #fff; }
+.full .hero .cta { color: #000; }          /* Magenta bleibt Magenta */
+
+/* Langsame Fahrt ins Bild, sobald es geladen ist. Dieselbe Idee wie auf
+   sandbox.fastforward.global, nur ruhiger. */
+@media (prefers-reduced-motion: no-preference) {
+  .full .hero__img { animation: heroDrift 24s ease-out both; }
+  @keyframes heroDrift {
+    from { transform: scale(1.12) translateY(1.2%); }
+    to   { transform: scale(1.03) translateY(0); }
+  }
+}
+
+@media (max-width: 860px) {
+  .full .hero { min-height: 92svh; }
+  .full .hero__img { object-position: 50% 32%; }
+}
+
+/* ---------- hidden muss gewinnen ----------
+   .done und .bar setzen display:flex. Das schlaegt die Browserregel
+   [hidden]{display:none}, weil Klassenselektoren spezifischer sind als das
+   Attribut in der UA-Stylesheet. Folge: die Bestaetigungsseite stand von
+   Anfang an unter dem Formular, mit ihren eigenen Knoepfen, und die Leiste
+   blieb nach dem Absenden stehen. Faellt im Bau nicht auf, weil man die Seite
+   selten bis unten durchscrollt, ohne abzusenden. */
+[hidden] { display: none !important; }
+
+/* ---------- die breite Kachel ----------
+   Sieben normale Kacheln plus eine doppelt breite ergeben neun Zellen, also
+   einen vollen 3x3-Block ohne ausgefranste letzte Reihe. Das lange Tischbild
+   vertraegt das Querformat am besten. */
+.full .shots__grid figure.is-wide { grid-column: span 2; }
+@media (max-width: 860px) {
+  .full .shots__grid figure.is-wide { grid-column: 1 / -1; }
+}
+
+/* ---------- Abstand vor der Fusszeile ----------
+   .rsvp traegt auch die Klasse .section, und die weiter oben stehende
+   .section-Regel setzt padding-bottom auf 0 — deshalb sass die Trennlinie
+   der Fusszeile direkt an der Unterkante der weissen Karte. Hier wieder Luft
+   darunter, mit hoeherer Spezifitaet, damit es nicht noch einmal passiert. */
+.full .section.rsvp { padding-bottom: clamp(56px, 7vw, 96px); }
+.full .foot { padding-top: clamp(34px, 4.5vw, 52px); }
